@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import './HeartIcon.css';
 
 const heart = keyframes`
@@ -52,14 +52,24 @@ const heart = keyframes`
     color: #ed6103;
   }
 
-
-
-
-
 `;
-
+const unheart = keyframes`
+0%{
+  color:#ecaa25
+  }
+100%{
+  color:#d2c4c4
+  }
+`;
 export const HeartClick = styled.div`
-  animation: ${heart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation: ${({ isGood }) =>
+    isGood
+      ? css`
+          ${heart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
+        `
+      : css`
+          ${unheart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
+        `};
 `;
 export const HeartIcon = ({ isGood }) => {
   console.log(isGood);

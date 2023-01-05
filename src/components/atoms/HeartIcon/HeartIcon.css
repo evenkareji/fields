@@ -1,6 +1,7 @@
+/* styledよりも優先される */
 .heart {
   font-size: 40px;
-  color: #e72727;
+
   user-select: none;
 }
 /*
