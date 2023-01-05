@@ -1,58 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import next from '../../images/next.png';
-import insta from '../../images/insta.png';
+// import { IconButton } from '@material-ui/core';
+import { OnFollowBtn } from '../atoms/OnFollowBtn';
+import { UnFollowBtn } from '../atoms/UnFollowBtn';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
-export const Text = () => {
+import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
+import { IconButton } from '@mui/material';
+export const Text = ({ user }) => {
+  const [isGood, setIsGood] = useState(false);
+
+  // const [count, setCount] = useState(0);
+  const onClickGood = () => setIsGood(!isGood);
   return (
-    <PostSlide>
-      <PostBorder>
-        <SPostContent>
-          <SPostHeader>
-            <SUserIconImg src={insta} />
-            <Box>
-              <SUserName>Mafin</SUserName>
-              <SUserFollow>フォロー</SUserFollow>
-            </Box>
-          </SPostHeader>
-          <SPostArticle>
-            hello World 世界に配信して 誹謗中傷がない世界に向けて
-          </SPostArticle>
-        </SPostContent>
-        <SAside>
-          <Heart sx={{ fontSize: 30 }} />
+    <PostBorder>
+      {/* <SImg src={next} alt="" /> */}
+      <SBg />
+      <SPostContent>
+        <SPostHeader>
+          <SUserIconImg src={user.icon} />
+          <Box>
+            <SUserName>{user.name}</SUserName>
+            {user.isFollow ? (
+              <OnFollowBtn>{user.onFollow}</OnFollowBtn>
+            ) : (
+              <UnFollowBtn>{user.unFollow}</UnFollowBtn>
+            )}
+          </Box>
+        </SPostHeader>
+        <SPostArticle>{user.text}</SPostArticle>
+      </SPostContent>
+      <SAside>
+        <div onClick={onClickGood}>
+          <HeartIcon isGood={isGood} />
+        </div>
+
+        <IconButton>
           <Chat sx={{ fontSize: 30 }} />
-        </SAside>
-      </PostBorder>
-    </PostSlide>
+        </IconButton>
+        <ChatCount>{user.chatCount}</ChatCount>
+      </SAside>
+    </PostBorder>
   );
 };
-const PostSlide = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  border-radius: 0;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  @media (min-width: 425px) {
-    & {
-      max-width: 400px;
-      width: 100%;
-      height: 95vh;
-      border-radius: 20px;
-    }
-  }
-
-  display: flex;
-  flex: 1;
-  align-items: center;
-  flex-direction: column;
-  overflow: scroll;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-`;
 const SPostContent = styled.div`
   position: absolute;
   top: 25%;
@@ -93,48 +83,48 @@ const SUserName = styled.h1`
   font-size: 16px;
   font-weight: bold;
 `;
-const SUserFollow = styled.button`
-  padding: 6px 15px 5px 17px;
-  border: 1px solid #000000;
-  border-radius: 8px;
-  width: 82px;
-  font-size: 12px;
-  font-weight: bold;
-  background: rgba(255, 255, 255, 0);
-  color: #050505;
-`;
 
 const SAside = styled.div`
   position: absolute;
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   top: 65%;
+  align-items: center;
   right: 10px;
   padding: 20px;
   text-align: center;
 `;
-const Heart = styled(FavoriteBorderIcon)`
-  margin-bottom: 34px;
-  color: #000;
-`;
+
 const Chat = styled(ChatIcon)`
   color: #000;
   font-size: 100px;
 `;
-
-const PostBg = styled.div`
-  color: white;
-  background-color: black;
-  height: 100vh;
-  display: grid;
-  place-items: center;
+const HeartCount = styled.span`
+  margin-bottom: 34px;
+  color: #000;
 `;
+const ChatCount = styled.span`
+  color: #000;
+`;
+
 const PostBorder = styled.div`
   position: relative;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 
   width: 100%;
   height: 100%;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 `;
+const SBg = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  background-color: #fce1e1;
+`;
+// const SImg = styled.img`
+//   width: 100%;
+//   height: 100vh;
+//   object-fit: cover;
+// `;

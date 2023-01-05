@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { HeartIcon } from './components/atoms/HeartIcon/HeartIcon';
 import { Login } from './components/Login/Login';
 import { Post } from './components/Post/Post';
 
