@@ -1,29 +1,25 @@
-import { BrowserRouter, Link, Route } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ChatIcon from '@mui/icons-material/Chat';
 import styled from 'styled-components';
-import next from '../../images/next.png';
 import insta from '../../images/insta.png';
 import { Text } from '../Text/Text';
+import Home from '@mui/icons-material/Home';
+import { FooterHome } from '../Home/FooterHome';
 
 const user = {
   icon: insta,
   name: 'mafin',
   text: 'hello World 世界に配信して 誹謗中傷がない世界に向けて',
 
-  unFollow: 'フォロー',
-  onFollow: 'フォロー中',
-
-  heartCount: 1000,
+  heartCount: 900,
   chatCount: 1000,
 
   // redux Toolkit
-  isFollow: true,
-  isGood: false,
+
+  // isFollow: true,
+  // isGood: false,
 };
 export const Post = () => {
   return (
-    <div>
+    <SPostMain>
       <PostBg>
         <PostSlide>
           <Text user={user} />
@@ -31,9 +27,13 @@ export const Post = () => {
           <Text user={user} />
         </PostSlide>
       </PostBg>
-    </div>
+      <FooterHome />
+    </SPostMain>
   );
 };
+const SPostMain = styled.div`
+  position: relative;
+`;
 const PostBg = styled.div`
   color: white;
   background-color: black;

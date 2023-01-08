@@ -9,9 +9,8 @@ import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
 export const Text = ({ user }) => {
   const [isGood, setIsGood] = useState(false);
+  const [isFollow, setIsFollow] = useState(false);
 
-  // const [count, setCount] = useState(0);
-  const onClickGood = () => setIsGood(!isGood);
   return (
     <PostBorder>
       {/* <SImg src={next} alt="" /> */}
@@ -21,20 +20,22 @@ export const Text = ({ user }) => {
           <SUserIconImg src={user.icon} />
           <Box>
             <SUserName>{user.name}</SUserName>
-            {user.isFollow ? (
-              <OnFollowBtn>{user.onFollow}</OnFollowBtn>
-            ) : (
-              <UnFollowBtn>{user.unFollow}</UnFollowBtn>
-            )}
+            <div onClick={() => setIsFollow(!isFollow)}>
+              {isFollow ? (
+                <OnFollowBtn>フォロー中</OnFollowBtn>
+              ) : (
+                <UnFollowBtn>フォロー</UnFollowBtn>
+              )}
+            </div>
           </Box>
         </SPostHeader>
         <SPostArticle>{user.text}</SPostArticle>
       </SPostContent>
       <SAside>
-        <div onClick={onClickGood}>
+        <div onClick={() => setIsGood(!isGood)}>
           <HeartIcon isGood={isGood} />
         </div>
-
+        <HeartCount>{user.heartCount}</HeartCount>
         <IconButton>
           <Chat sx={{ fontSize: 30 }} />
         </IconButton>
@@ -65,6 +66,7 @@ const SPostArticle = styled.p`
 `;
 const Box = styled.div`
   margin-left: 20px;
+  /* margin-top: 10px; */
 `;
 const SPostHeader = styled.header`
   display: flex;
@@ -88,7 +90,7 @@ const SAside = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 65%;
+  top: 62%;
   align-items: center;
   right: 10px;
   padding: 20px;
@@ -100,7 +102,7 @@ const Chat = styled(ChatIcon)`
   font-size: 100px;
 `;
 const HeartCount = styled.span`
-  margin-bottom: 34px;
+  margin-bottom: 18px;
   color: #000;
 `;
 const ChatCount = styled.span`
@@ -121,7 +123,7 @@ const SBg = styled.div`
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  background-color: #fce1e1;
+  background-color: #fafafa;
 `;
 // const SImg = styled.img`
 //   width: 100%;

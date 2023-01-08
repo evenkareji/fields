@@ -1,18 +1,25 @@
 import styled from 'styled-components';
 import { Link, Route, Routes } from 'react-router-dom';
-import { Post } from '../Post/Post';
+import { LoginForm } from '../atoms/LoginForm';
 
 export const Login = () => {
   return (
     <SLoginBack>
       <SLoginBorder>
         <SForm>
-          <SFormHead>Afimのアカウント登録</SFormHead>
+          <SFormHead>AFim</SFormHead>
           <SEmail placeholder="メールアドレス" />
           <SPassword placeholder="パスワード" />
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <SSubmit type="submit">登録</SSubmit>
-          </Link>
+          <SLink to="/" style={{ textDecoration: 'none', color: '#fff' }}>
+            <SSubmit type="submit">ログイン</SSubmit>
+          </SLink>
+          <SHr />
+          <STextFlex>
+            <p>アカウントをお持ちでないですか?</p>
+            <Link to="/register" style={{ textDecoration: 'none' }}>
+              登録する
+            </Link>
+          </STextFlex>
         </SForm>
       </SLoginBorder>
     </SLoginBack>
@@ -28,7 +35,7 @@ const SLoginBack = styled.div`
   align-items: center;
 `;
 const SLoginBorder = styled.div`
-  width: 70%;
+  width: 90%;
   background-color: #fff;
   height: 80vh;
   border-radius: 16px;
@@ -38,40 +45,24 @@ const SLoginBorder = styled.div`
   align-items: center;
 `;
 const SForm = styled.form`
-  width: 70%;
+  width: 85%;
   height: 50vh;
   max-width: 400px;
   margin: 0 auto;
+  padding: 40px 0px;
 `;
 const SFormHead = styled.div`
   font-weight: bold;
   font-size: 24px;
+  margin-bottom: 44px;
 `;
-const SEmail = styled.input`
-  height: 40px;
-  width: 100%;
-  max-width: 400px;
-
-  border: 1px solid #d9d9d9;
-  border-radius: 14px;
-  transition: transform 0.4s;
-  padding: 22px 10px;
-  &:focus {
-    transition: transform 4s;
-
-    outline: #fd0707 auto 1px;
-    &::placeholder {
-      transition: transform 0.2s;
-      color: #fd0707;
-      font-size: 8px;
-      /* transform: translateY(-100%); */
-      transform-origin: top;
-      transform: translateY(-100%);
-    }
-  }
+const SEmail = styled(LoginForm)`
+  margin-bottom: 14px;
 `;
 
-const SPassword = styled(SEmail)``;
+const SPassword = styled(LoginForm)`
+  margin-bottom: 28px;
+`;
 
 const SSubmit = styled.button`
   text-decoration: none;
@@ -87,4 +78,28 @@ const SSubmit = styled.button`
   margin-left: auto;
   justify-content: center;
   align-items: center;
+`;
+const SLink = styled(Link)`
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  width: 50%;
+  height: 40px;
+  background-color: #ed6103;
+  border-radius: 30px;
+  color: #fff;
+  max-width: 150px;
+  margin-left: auto;
+`;
+const STextFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  a {
+    color: #ed6103;
+  }
+`;
+const SHr = styled.hr`
+  border: 1px solid rgb(207, 217, 222);
+  margin-top: 52px;
+  margin-bottom: 42px;
 `;

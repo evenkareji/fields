@@ -2,6 +2,25 @@ import { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import './HeartIcon.css';
 
+export const HeartIcon = ({ isGood }) => {
+  return (
+    <HeartClick isGood={isGood}>
+      <i className="material-icons heart">favorite</i>
+    </HeartClick>
+  );
+};
+
+export const HeartClick = styled.div`
+  animation: ${({ isGood }) =>
+    isGood
+      ? css`
+          ${heart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
+        `
+      : css`
+          ${unheart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
+        `};
+`;
+
 const heart = keyframes`
    0% {
     transform: scale(0) rotate(0);
@@ -49,7 +68,7 @@ const heart = keyframes`
 
   100% {
     transform: scale(1) rotate(0) translateY(0);
-    color: #ed6103;
+    color: #ff6702;
   }
 
 `;
@@ -61,21 +80,3 @@ const unheart = keyframes`
   color:#d2c4c4
   }
 `;
-export const HeartClick = styled.div`
-  animation: ${({ isGood }) =>
-    isGood
-      ? css`
-          ${heart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
-        `
-      : css`
-          ${unheart} 1.2s forwards cubic-bezier(0.19, 1, 0.22, 1)
-        `};
-`;
-export const HeartIcon = ({ isGood }) => {
-  console.log(isGood);
-  return (
-    <HeartClick isGood={isGood}>
-      <i className="material-icons heart">favorite</i>
-    </HeartClick>
-  );
-};

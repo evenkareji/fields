@@ -1,14 +1,21 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { AddPost } from './components/AddPost/AddPost';
 import { HeartIcon } from './components/atoms/HeartIcon/HeartIcon';
-import { Login } from './components/Login/Login';
+import { Home } from './components/Home/FooterHome';
+import { Login } from './components/molecules/Login';
+import { Register } from './components/molecules/Register';
 import { Post } from './components/Post/Post';
+import { Profile } from './components/Profile/Profile';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Post />} />
+      <Route path="/mafin" element={<Profile />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/addpost" element={<AddPost />} />
     </Routes>
   );
 }

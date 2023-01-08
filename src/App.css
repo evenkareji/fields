@@ -1,0 +1,6 @@
+:root {
+  --unfollow-bg-color: rgba(255, 255, 255);
+}
+.unfollow-bg-color {
+  background-color: var(--unfollow-bg-color);
+}

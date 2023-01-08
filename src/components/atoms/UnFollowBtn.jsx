@@ -6,7 +6,7 @@ export const UnFollowBtn = (props) => {
   const { children } = props;
   return (
     <IconButton style={{ padding: '0px' }}>
-      <SUnFollowBtn>{children}</SUnFollowBtn>;
+      <SUnFollowBtn className="unfollow-bg-color">{children}</SUnFollowBtn>
     </IconButton>
   );
 };
