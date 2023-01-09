@@ -21,7 +21,7 @@ export const FooterHome = () => {
           <small>投稿</small>
         </SIconButton>
       </SLinkFooter>
-      <SLinkFooter exact to="/mafin">
+      <SLinkFooter to="/mafin">
         <SIconButton>
           <SHomeProfileIcon src={next} />
           <small>プロフィール</small>
@@ -31,7 +31,7 @@ export const FooterHome = () => {
   );
 };
 const SFooter = styled.footer`
-  /* border-top: 1px solid #fff; */
+  border-top: 1px solid #dbdbdb;
   position: fixed;
   bottom: 0;
   left: 0;

@@ -7,7 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
-export const Text = ({ user }) => {
+export const Text = ({ post }) => {
   const [isGood, setIsGood] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
 
@@ -17,9 +17,9 @@ export const Text = ({ user }) => {
       <SBg />
       <SPostContent>
         <SPostHeader>
-          <SUserIconImg src={user.icon} />
+          <SUserIconImg src={post.profileImg} />
           <Box>
-            <SUserName>{user.name}</SUserName>
+            <SUserName>{post.username}</SUserName>
             <div onClick={() => setIsFollow(!isFollow)}>
               {isFollow ? (
                 <OnFollowBtn>フォロー中</OnFollowBtn>
@@ -29,17 +29,17 @@ export const Text = ({ user }) => {
             </div>
           </Box>
         </SPostHeader>
-        <SPostArticle>{user.text}</SPostArticle>
+        <SPostArticle>{post.desc}</SPostArticle>
       </SPostContent>
       <SAside>
         <div onClick={() => setIsGood(!isGood)}>
           <HeartIcon isGood={isGood} />
         </div>
-        <HeartCount>{user.heartCount}</HeartCount>
+        {/* <HeartCount>{post.heartCount}</HeartCount> */}
         <IconButton>
           <Chat sx={{ fontSize: 30 }} />
         </IconButton>
-        <ChatCount>{user.chatCount}</ChatCount>
+        {/* <ChatCount>{user.chatCount}</ChatCount> */}
       </SAside>
     </PostBorder>
   );

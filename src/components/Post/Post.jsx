@@ -3,7 +3,7 @@ import insta from '../../images/insta.png';
 import { Text } from '../Text/Text';
 import Home from '@mui/icons-material/Home';
 import { FooterHome } from '../Home/FooterHome';
-
+import { Posts } from '../../dummyData';
 const user = {
   icon: insta,
   name: 'mafin',
@@ -11,20 +11,19 @@ const user = {
 
   heartCount: 900,
   chatCount: 1000,
-
-  // redux Toolkit
-
-  // isFollow: true,
-  // isGood: false,
 };
 export const Post = () => {
   return (
     <SPostMain>
       <PostBg>
         <PostSlide>
+          {Posts.map((post) => (
+            <Text post={post} key={post.id} />
+          ))}
+
+          {/* <Text user={user} />
           <Text user={user} />
-          <Text user={user} />
-          <Text user={user} />
+          <Text user={user} /> */}
         </PostSlide>
       </PostBg>
       <FooterHome />

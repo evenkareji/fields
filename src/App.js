@@ -5,6 +5,7 @@ import { HeartIcon } from './components/atoms/HeartIcon/HeartIcon';
 import { Home } from './components/Home/FooterHome';
 import { Login } from './components/molecules/Login';
 import { Register } from './components/molecules/Register';
+import { PersonalPost } from './components/PersonalPost/PersonalPost';
 import { Post } from './components/Post/Post';
 import { Profile } from './components/Profile/Profile';
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/addpost" element={<AddPost />} />
+      <Route path="/personalpost" element={<PersonalPost />} />
     </Routes>
   );
 }
