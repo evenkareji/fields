@@ -25,7 +25,11 @@ export const Profile = () => {
     <SProfileBox>
       <SProfileInfo>
         <SPriofileImg
-          src={profileUser.profileImg || PUBLIC_FOLDER + 'person/noAvatar.png'}
+          src={
+            profileUser.profileImg
+              ? PUBLIC_FOLDER + profileUser.profileImg
+              : PUBLIC_FOLDER + '/person/noAvatar.png'
+          }
         />
         <SProfileUserName>{profileUser.username}</SProfileUserName>
         <SProfileFlex>

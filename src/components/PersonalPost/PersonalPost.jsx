@@ -26,7 +26,7 @@ export const PersonalPost = ({ username }) => {
 
 const SPersonalPost = styled.div`
   padding-top: 30px;
-  padding-bottom: 130px;
+  padding-bottom: 75px;
 `;
 
 const SUserArea = styled.div`

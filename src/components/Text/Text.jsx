@@ -8,6 +8,7 @@ import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
 // import { Users } from '../../dummyData.js';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export const Text = ({ post }) => {
   const [user, setUser] = useState({});
@@ -30,9 +31,15 @@ export const Text = ({ post }) => {
       <SBg />
       <SPostContent>
         <SPostHeader>
-          <SUserIconImg
-            src={user.profileImg || PUBLIC_FOLDER + 'person/noAvatar.png'}
-          />
+          <Link to={`profile/${user.username}`}>
+            <SUserIconImg
+              src={
+                user.profileImg
+                  ? PUBLIC_FOLDER + user.profileImg
+                  : PUBLIC_FOLDER + '/person/noAvatar.png'
+              }
+            />
+          </Link>
           <Box>
             <SUserName>
               {/* post.idとuser.idが一致した時投稿したユーザーと判別される */}
