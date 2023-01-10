@@ -13,7 +13,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Post />} />
-      <Route path="/profile/mafin" element={<Profile />} />
+      <Route path="/profile/:username" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/addpost" element={<AddPost />} />

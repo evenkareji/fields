@@ -6,27 +6,34 @@ import { ProfileCount } from '../molecules/ProfileCount';
 import { PersonalPost } from '../PersonalPost/PersonalPost';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { FooterHome } from '../Home/FooterHome';
 export const Profile = () => {
-  const [posts, setPosts] = useState([]);
+  const [profileUser, setProfileUser] = useState([]);
+  const username = useParams().username;
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get('/posts/profile/mafin');
+      const response = await axios.get(`/users?username=${username}`);
       console.log(response);
-      setPosts(response.data);
+      setProfileUser(response.data);
     };
     fetchPost();
-  }, []);
+  }, [username]);
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
-    <div>
+    <SProfileBox>
       <SProfileInfo>
-        <SPriofileImg src={next} />
-        <SProfileUserName>mafin</SProfileUserName>
+        <SPriofileImg
+          src={profileUser.profileImg || PUBLIC_FOLDER + 'person/noAvatar.png'}
+        />
+        <SProfileUserName>{profileUser.username}</SProfileUserName>
         <SProfileFlex>
           <ProfileCount name="フォロー" count="999" />
           <ProfileCount name="フォロワー" count="999" />
           <ProfileCount name="ありがとう" count="999" />
         </SProfileFlex>
+        <SIntroduction>{profileUser.desc}</SIntroduction>
       </SProfileInfo>
       <SIconButtons>
         <SIconButton>
@@ -34,11 +41,20 @@ export const Profile = () => {
         </SIconButton>
       </SIconButtons>
       <SPadding>
-        <PersonalPost />
+        <PersonalPost username={username} />
       </SPadding>
-    </div>
+      <FooterHome username={username} />
+    </SProfileBox>
   );
 };
+const SProfileBox = styled.div`
+  position: relative;
+`;
+const SIntroduction = styled.div`
+  padding: 30px 0px 0px;
+  margin: 0 auto;
+  width: 50%;
+`;
 const SIconButtons = styled.div`
   width: 100%;
   border-top: 1px solid #000;

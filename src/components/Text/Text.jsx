@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 // import { IconButton } from '@material-ui/core';
 import { OnFollowBtn } from '../atoms/OnFollowBtn';
 import { UnFollowBtn } from '../atoms/UnFollowBtn';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
-import { Users } from '../../dummyData.js';
+// import { Users } from '../../dummyData.js';
+import axios from 'axios';
 
 export const Text = ({ post }) => {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users/${post.userId}`);
+      console.log(response);
+      setUser(response.data);
+    };
+    fetchUser();
+  }, []);
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [isGood, setIsGood] = useState(false);
@@ -22,15 +31,12 @@ export const Text = ({ post }) => {
       <SPostContent>
         <SPostHeader>
           <SUserIconImg
-            src={
-              Users.filter((user) => user.id === post.id)[0].profileImg ||
-              PUBLIC_FOLDER + 'person/noAvatar.png'
-            }
+            src={user.profileImg || PUBLIC_FOLDER + 'person/noAvatar.png'}
           />
           <Box>
             <SUserName>
               {/* post.idとuser.idが一致した時投稿したユーザーと判別される */}
-              {Users.filter((user) => user.id === post.id)[0].username}
+              {user.username}
             </SUserName>
             <div onClick={() => setIsFollow(!isFollow)}>
               {isFollow ? (
@@ -47,7 +53,7 @@ export const Text = ({ post }) => {
         <div onClick={() => setIsGood(!isGood)}>
           <HeartIcon isGood={isGood} />
         </div>
-        <HeartCount>{post.like}</HeartCount>
+        <HeartCount>{post.likes.length}</HeartCount>
         <IconButton>
           <Chat sx={{ fontSize: 30 }} />
         </IconButton>

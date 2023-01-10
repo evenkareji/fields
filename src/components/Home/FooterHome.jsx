@@ -3,7 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { SUserIconImg } from '../atoms/SUserIconImg';
 import next from '../../images/next.png';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 export const FooterHome = () => {
@@ -21,7 +21,7 @@ export const FooterHome = () => {
           <small>投稿</small>
         </SIconButton>
       </SLinkFooter>
-      <SLinkFooter to="/profile">
+      <SLinkFooter to={`/profile/メイウェザー`}>
         <SIconButton>
           <SHomeProfileIcon src={next} />
           <small>プロフィール</small>

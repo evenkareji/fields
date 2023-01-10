@@ -4,13 +4,23 @@ import { Text } from '../Text/Text';
 import Home from '@mui/icons-material/Home';
 import { FooterHome } from '../Home/FooterHome';
 import { Posts } from '../../dummyData.js';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 export const Post = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      const response = await axios.get('/posts');
+      console.log(response);
+      setPosts(response.data);
+    };
+    fetchPost();
+  }, []);
   return (
     <SPostMain>
       <PostBg>
         <PostSlide>
-          {Posts.map((post) => (
+          {posts.map((post) => (
             <Text post={post} key={post._id} />
           ))}
 

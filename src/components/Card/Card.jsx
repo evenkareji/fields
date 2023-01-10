@@ -5,12 +5,12 @@ export const Card = ({ post }) => {
   const [user, setUser] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users/${post.userId}`);
+      const response = await axios.get(`/users?userId=${post.userId}`);
       console.log(response);
       setUser(response.data);
     };
     fetchUser();
-  }, []);
+  }, [post.userId]);
   return (
     <SCard key={post._id}>
       <SProfileText key={post._id}>{post.desc}</SProfileText>
@@ -18,7 +18,6 @@ export const Card = ({ post }) => {
   );
 };
 const SCard = styled.div`
-  /* width: 80%; */
   background-color: #ebeafc;
   border: 1px solid #000;
   padding: 70px 16px;
