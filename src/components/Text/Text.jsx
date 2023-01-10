@@ -7,7 +7,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatIcon from '@mui/icons-material/Chat';
 import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
+import { Users } from '../../dummyData.js';
+
 export const Text = ({ post }) => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const [isGood, setIsGood] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
 
@@ -17,9 +21,17 @@ export const Text = ({ post }) => {
       <SBg />
       <SPostContent>
         <SPostHeader>
-          <SUserIconImg src={post.profileImg} />
+          <SUserIconImg
+            src={
+              Users.filter((user) => user.id === post.id)[0].profileImg ||
+              PUBLIC_FOLDER + 'person/noAvatar.png'
+            }
+          />
           <Box>
-            <SUserName>{post.username}</SUserName>
+            <SUserName>
+              {/* post.idとuser.idが一致した時投稿したユーザーと判別される */}
+              {Users.filter((user) => user.id === post.id)[0].username}
+            </SUserName>
             <div onClick={() => setIsFollow(!isFollow)}>
               {isFollow ? (
                 <OnFollowBtn>フォロー中</OnFollowBtn>
@@ -35,11 +47,11 @@ export const Text = ({ post }) => {
         <div onClick={() => setIsGood(!isGood)}>
           <HeartIcon isGood={isGood} />
         </div>
-        {/* <HeartCount>{post.heartCount}</HeartCount> */}
+        <HeartCount>{post.like}</HeartCount>
         <IconButton>
           <Chat sx={{ fontSize: 30 }} />
         </IconButton>
-        {/* <ChatCount>{user.chatCount}</ChatCount> */}
+        <ChatCount>{post.comment}</ChatCount>
       </SAside>
     </PostBorder>
   );

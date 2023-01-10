@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Card } from '../Card/Card';
+import axios from 'axios';
 
 export const PersonalPost = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      const response = await axios.get('/posts/profile/mafin');
+      console.log(response);
+      setPosts(response.data);
+    };
+    fetchPost();
+  }, []);
   return (
     <SPersonalPost>
       <SUserArea>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
-        <SCard>Hello Hello</SCard>
+        {posts.map((post) => (
+          <Card post={post} key={post._id} />
+        ))}
       </SUserArea>
     </SPersonalPost>
   );
 };
+
 const SPersonalPost = styled.div`
   padding-top: 30px;
 `;
-const SCard = styled.div`
-  border: 1px solid #000;
-  padding: 16px;
-  height: 250px;
-`;
+
 const SUserArea = styled.div`
   width: 100%;
   display: grid;

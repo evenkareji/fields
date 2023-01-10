@@ -3,22 +3,15 @@ import insta from '../../images/insta.png';
 import { Text } from '../Text/Text';
 import Home from '@mui/icons-material/Home';
 import { FooterHome } from '../Home/FooterHome';
-import { Posts } from '../../dummyData';
-const user = {
-  icon: insta,
-  name: 'mafin',
-  text: 'hello World 世界に配信して 誹謗中傷がない世界に向けて',
+import { Posts } from '../../dummyData.js';
 
-  heartCount: 900,
-  chatCount: 1000,
-};
 export const Post = () => {
   return (
     <SPostMain>
       <PostBg>
         <PostSlide>
           {Posts.map((post) => (
-            <Text post={post} key={post.id} />
+            <Text post={post} key={post._id} />
           ))}
 
           {/* <Text user={user} />

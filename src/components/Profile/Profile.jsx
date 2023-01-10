@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SUserIconImg } from '../atoms/SUserIconImg';
 import next from '../../images/next.png';
 import styled from 'styled-components';
 import { ProfileCount } from '../molecules/ProfileCount';
 import { PersonalPost } from '../PersonalPost/PersonalPost';
 import { IconButton } from '@mui/material';
+import axios from 'axios';
 export const Profile = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      const response = await axios.get('/posts/profile/mafin');
+      console.log(response);
+      setPosts(response.data);
+    };
+    fetchPost();
+  }, []);
+
   return (
     <div>
       <SProfileInfo>

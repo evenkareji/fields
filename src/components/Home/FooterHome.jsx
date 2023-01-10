@@ -21,7 +21,7 @@ export const FooterHome = () => {
           <small>投稿</small>
         </SIconButton>
       </SLinkFooter>
-      <SLinkFooter to="/mafin">
+      <SLinkFooter to="/profile">
         <SIconButton>
           <SHomeProfileIcon src={next} />
           <small>プロフィール</small>
@@ -42,7 +42,7 @@ const SFooter = styled.footer`
   justify-content: space-between;
   @media (min-width: 425px) {
     & {
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.7);
       justify-content: space-around;
     }
   }
