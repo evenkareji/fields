@@ -1,13 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { AddPost } from './components/AddPost/AddPost';
-import { HeartIcon } from './components/atoms/HeartIcon/HeartIcon';
-import { Home } from './components/Home/FooterHome';
 import { Login } from './components/molecules/Login';
 import { Register } from './components/molecules/Register';
-import { PersonalPost } from './components/PersonalPost/PersonalPost';
-import { Post } from './components/Post/Post';
-import { Profile } from './components/Profile/Profile';
+import { Post } from './components/pages/Post';
+import { Profile } from './components/pages/Profile';
 
 function App() {
   return (

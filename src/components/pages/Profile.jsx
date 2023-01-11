@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { SUserIconImg } from '../atoms/SUserIconImg';
-import next from '../../images/next.png';
 import styled from 'styled-components';
 import { ProfileCount } from '../molecules/ProfileCount';
-import { PersonalPost } from '../PersonalPost/PersonalPost';
+import { PersonalPost } from '../organisms/PersonalPost';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { FooterHome } from '../Home/FooterHome';
+import { FooterIcon } from '../templates/FooterIcon';
 export const Profile = () => {
   const [profileUser, setProfileUser] = useState([]);
   const username = useParams().username;
@@ -47,7 +46,7 @@ export const Profile = () => {
       <SPadding>
         <PersonalPost username={username} />
       </SPadding>
-      <FooterHome username={username} />
+      <FooterIcon username={username} />
     </SProfileBox>
   );
 };

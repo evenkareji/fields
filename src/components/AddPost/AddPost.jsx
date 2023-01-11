@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FooterHome } from '../Home/FooterHome';
+import { FooterIcon } from '../templates/FooterIcon';
 
 export const AddPost = () => {
   return (
@@ -9,7 +9,7 @@ export const AddPost = () => {
         <input placeholder="どう感じますか？" type="text" />
         <input value="送信" type="submit" />
       </form>
-      <FooterHome />
+      <FooterIcon />
     </Scenter>
   );
 };

@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-import insta from '../../images/insta.png';
-import { Text } from '../Text/Text';
-import Home from '@mui/icons-material/Home';
-import { FooterHome } from '../Home/FooterHome';
-import { Posts } from '../../dummyData.js';
+import { Text } from '../organisms/Text';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FooterIcon } from '../templates/FooterIcon';
 export const Post = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -29,7 +26,7 @@ export const Post = () => {
           <Text user={user} /> */}
         </PostSlide>
       </PostBg>
-      <FooterHome />
+      <FooterIcon />
     </SPostMain>
   );
 };

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link, Route, Routes } from 'react-router-dom';
-import { Post } from '../Post/Post';
 import { LoginForm } from '../atoms/LoginForm';
 
 export const Register = () => {

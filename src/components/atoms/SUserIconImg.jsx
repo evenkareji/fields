@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SUserIconImg = styled.img`
+export const UserIconImg = styled.img`
   object-fit: cover;
   border-radius: 100%;
   width: 46px;

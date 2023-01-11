@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Card } from '../Card/Card';
+import { Card } from './Card';
 import axios from 'axios';
 
 export const PersonalPost = ({ username }) => {
