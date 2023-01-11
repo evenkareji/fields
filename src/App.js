@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { AddPost } from './components/AddPost/AddPost';
-import { Login } from './components/molecules/Login';
-import { Register } from './components/molecules/Register';
+import { Login } from './components/pages/Login';
+import { Register } from './components/pages/Register';
 import { Post } from './components/pages/Post';
 import { Profile } from './components/pages/Profile';
 

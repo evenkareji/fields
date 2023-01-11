@@ -25,6 +25,7 @@ export const PersonalPost = ({ username }) => {
 };
 
 const SPersonalPost = styled.div`
+  width: 100%;
   padding-top: 30px;
   padding-bottom: 75px;
 `;

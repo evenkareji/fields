@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SUserIconImg } from '../atoms/SUserIconImg';
+import { UserIconImg } from '../atoms/UserIconImg';
 import { Icon } from '../atoms/Icon';
 import { Home } from '../molecules/Home';
 import { AddPostIcon } from '../molecules/AddPostIcon';
@@ -41,7 +41,7 @@ const SFooter = styled.footer`
     }
   }
 `;
-const SProfileIcon = styled(SUserIconImg)`
+const SProfileIcon = styled(UserIconImg)`
   width: 32px;
   height: 32px;
 `;

@@ -24,6 +24,7 @@ const SCard = styled.div`
   height: 250px;
 `;
 const SProfileText = styled.div`
+  font-family: 'Noto Serif JP';
   margin: 0 auto;
   font-size: 20px;
   width: 80%;

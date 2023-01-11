@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SUserIconImg } from '../atoms/SUserIconImg';
+import { SUserIconImg } from '../atoms/UserIconImg';
 import styled from 'styled-components';
 import { ProfileCount } from '../molecules/ProfileCount';
 import { PersonalPost } from '../organisms/PersonalPost';
@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FooterIcon } from '../templates/FooterIcon';
+import { UserIconWithName } from '../molecules/UserIconWithName';
 export const Profile = () => {
   const [profileUser, setProfileUser] = useState([]);
   const username = useParams().username;
@@ -23,14 +24,8 @@ export const Profile = () => {
   return (
     <SProfileBox>
       <SProfileInfo>
-        <SPriofileImg
-          src={
-            profileUser.profileImg
-              ? PUBLIC_FOLDER + profileUser.profileImg
-              : PUBLIC_FOLDER + '/person/noAvatar.png'
-          }
-        />
-        <SProfileUserName>{profileUser.username}</SProfileUserName>
+        {/* icon */}
+        <UserIconWithName profileUser={profileUser} />
         <SProfileFlex>
           <ProfileCount name="フォロー" count="999" />
           <ProfileCount name="フォロワー" count="999" />
@@ -58,6 +53,8 @@ const SIntroduction = styled.div`
   margin: 0 auto;
   width: 50%;
   max-width: 600px;
+  text-align: center;
+  font-size: 16px;
 `;
 const SIconButtons = styled.div`
   width: 100%;
@@ -95,24 +92,9 @@ const SProfileInfo = styled.div`
   padding: 43px 0;
   /* border-bottom: 1px solid #000; */
 `;
-const SPriofileImg = styled(SUserIconImg)`
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-  @media (min-width: 425px) {
-    & {
-      width: 150px;
-      height: 150px;
-    }
-  }
-`;
-const SProfileUserName = styled.div`
-  font-weight: bold;
-  font-size: 24px;
-  margin-bottom: 18px;
-  text-align: center;
-`;
+
 const SPadding = styled.div`
   padding-left: 3px;
   padding-right: 3px;
+  width: 100%;
 `;
