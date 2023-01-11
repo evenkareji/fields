@@ -58,6 +58,7 @@ const SIntroduction = styled.div`
   padding: 30px 0px 0px;
   margin: 0 auto;
   width: 50%;
+  max-width: 600px;
 `;
 const SIconButtons = styled.div`
   width: 100%;
