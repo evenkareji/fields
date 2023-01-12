@@ -5,6 +5,7 @@ import { Login } from './components/pages/Login';
 import { Register } from './components/pages/Register';
 import { Post } from './components/pages/Post';
 import { Profile } from './components/pages/Profile';
+import { FollowUserInfo } from './components/organisms/FollowUserInfo';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/addpost" element={<AddPost />} />
+      <Route path="/follow" element={<FollowUserInfo />} />
     </Routes>
   );
 }

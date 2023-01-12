@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { UserIconImg } from '../atoms/UserIconImg';
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 export const UserIconWithName = ({ profileUser }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [file, setFile] = useState(null);
+  console.log(file, 'giuyegvuveug');
   return (
     <div>
-      <SPriofileImg
-        src={
-          profileUser.profileImg
-            ? PUBLIC_FOLDER + profileUser.profileImg
-            : PUBLIC_FOLDER + '/person/noAvatar.png'
-        }
-      />
+      <SLabel htmlFor="file">
+        <SPriofileImg
+          src={
+            profileUser.profileImg
+              ? PUBLIC_FOLDER + profileUser.profileImg
+              : PUBLIC_FOLDER + '/person/noAvatar.png'
+          }
+        />
+        <SAddCircleIcon />
+        <input
+          type="file"
+          id="file"
+          style={{ display: 'none' }}
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+      </SLabel>
       <SProfileUserName>{profileUser.username}</SProfileUserName>
     </div>
   );
 };
+const SLabel = styled.label`
+  position: relative;
+  display: block;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 14px;
+  @media (min-width: 425px) {
+    & {
+      width: 180px;
+      height: 180px;
+    }
+  }
+`;
+const SAddCircleIcon = styled(AddCircleIcon)`
+  position: absolute;
+  bottom: -8px;
+  left: 68%;
+  font-size: 35px !important;
+  color: #ed6103 !important;
+  background: #fff;
+  border-radius: 2000px;
+`;
 const SPriofileImg = styled(UserIconImg)`
   width: 160px;
   height: 160px;
