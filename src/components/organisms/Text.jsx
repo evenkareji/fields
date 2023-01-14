@@ -1,29 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-// import { IconButton } from '@material-ui/core';
 import { OnFollowBtn } from '../atoms/OnFollowBtn';
 import { UnFollowBtn } from '../atoms/UnFollowBtn';
 import ChatIcon from '@mui/icons-material/Chat';
 import { HeartIcon } from '../atoms/HeartIcon/HeartIcon';
 import { IconButton } from '@mui/material';
-// import { Users } from '../../dummyData.js';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../state/AuthContext';
 
 export const Text = ({ post }) => {
+  const [isFollow, setIsFollow] = useState(false);
   const [user, setUser] = useState({});
+  const { user: loginUser } = useContext(AuthContext);
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(`/users/${post.userId}`);
-      console.log(response);
       setUser(response.data);
     };
     fetchUser();
-  }, []);
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  }, [post.userId]);
 
-  const [isGood, setIsGood] = useState(false);
-  const [isFollow, setIsFollow] = useState(false);
+  const handleLike = async () => {
+    try {
+      const response = await axios.put(`/posts/${post._id}/like`, {
+        userId: loginUser._id,
+      });
+
+      setIsGood(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleFollow = async () => {
+    try {
+      // フォローはできてるけどstorageに保存できてない;
+      console.log('実行');
+      const response = await axios.put(`/users/${post.userId}/follow`, {
+        userId: loginUser._id,
+      });
+      console.log('実行完了');
+
+      // setIsGood(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleUnFollow = async () => {
+    try {
+      // フォローはできてるけどstorageに保存できてない;
+      console.log('実行');
+      const response = await axios.put(`/users/${post.userId}/unfollow`, {
+        userId: loginUser._id,
+      });
+      console.log('実行完了');
+
+      // setIsGood(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // HeartActionSave
+  const [isGood, setIsGood] = useState(post.likes.includes(loginUser._id));
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <PostBorder>
@@ -45,19 +84,33 @@ export const Text = ({ post }) => {
               {/* post.idとuser.idが一致した時投稿したユーザーと判別される */}
               {user.username}
             </SUserName>
-            <div onClick={() => setIsFollow(!isFollow)}>
-              {isFollow ? (
-                <OnFollowBtn>フォロー中</OnFollowBtn>
-              ) : (
-                <UnFollowBtn>フォロー</UnFollowBtn>
-              )}
-            </div>
+            {/* onClick={() => */}
+            {loginUser._id !== post.userId && (
+              <div
+                onClick={() => {
+                  handleFollow();
+                  return setIsFollow(!isFollow);
+                }}
+              >
+                {isFollow ? (
+                  <OnFollowBtn>フォロー中</OnFollowBtn>
+                ) : (
+                  <UnFollowBtn>フォロー</UnFollowBtn>
+                )}
+              </div>
+            )}
           </Box>
         </SPostHeader>
-        <SPostArticle>{post.desc}</SPostArticle>
+        <SDescContainer>
+          <SPostArticle>{post.desc}</SPostArticle>
+        </SDescContainer>
       </SPostContent>
       <SAside>
-        <div onClick={() => setIsGood(!isGood)}>
+        <div
+          onClick={() => {
+            handleLike();
+          }}
+        >
           <HeartIcon isGood={isGood} />
         </div>
         <HeartCount>{post.likes.length}</HeartCount>
@@ -76,33 +129,34 @@ const SPostContent = styled.div`
   width: 74%;
   height: 70%;
 `;
-const SPostArticle = styled.p`
+const SPostHeader = styled.header`
+  display: flex;
+  align-items: center;
+`;
+
+const SDescContainer = styled.div`
   height: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  text-align: left;
+`;
+const SPostArticle = styled.p`
   font-size: 24px;
   color: #000;
-  margin: auto 0;
   font-family: 'Noto Serif JP';
   line-height: 2.4em;
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
 `;
 const Box = styled.div`
   margin-left: 20px;
-  /* margin-top: 10px; */
-`;
-const SPostHeader = styled.header`
-  display: flex;
-  align-items: center;
 `;
 
 const SUserIconImg = styled.img`
   object-fit: cover;
   border-radius: 100%;
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   background-color: #fff;
 `;
 const SUserName = styled.h1`

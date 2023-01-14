@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SUserIconImg } from '../atoms/UserIconImg';
 import styled from 'styled-components';
 import { ProfileCount } from '../molecules/ProfileCount';
@@ -8,18 +8,21 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FooterIcon } from '../templates/FooterIcon';
 import { UserIconWithName } from '../molecules/UserIconWithName';
+import { AuthContext } from '../../state/AuthContext';
+
 export const Profile = () => {
+  const { user } = useContext(AuthContext);
+
   const [profileUser, setProfileUser] = useState([]);
   const username = useParams().username;
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get(`/users?username=${username}`);
-      console.log(response);
+
       setProfileUser(response.data);
     };
     fetchPost();
   }, [username]);
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <SProfileBox>
@@ -27,9 +30,15 @@ export const Profile = () => {
         {/* icon */}
         <UserIconWithName profileUser={profileUser} />
         <SProfileFlex>
-          <ProfileCount name="フォロー" count="999" />
-          <ProfileCount name="フォロワー" count="999" />
-          <ProfileCount name="ありがとう" count="999" />
+          <ProfileCount name="投稿" count="999" />
+          <ProfileCount
+            name="フォロー"
+            count={profileUser.followings?.length}
+          />
+          <ProfileCount
+            name="フォロワー"
+            count={profileUser.followers?.length}
+          />
         </SProfileFlex>
         <SIntroduction>{profileUser.desc}</SIntroduction>
       </SProfileInfo>
@@ -58,11 +67,12 @@ const SIntroduction = styled.div`
 `;
 const SIconButtons = styled.div`
   width: 100%;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border-top: 1px solid #dfdfdf;
 `;
 const SProfileOption = styled.div`
   font-size: 18px;
+  color: #ed6103;
+  font-weight: bold;
 `;
 const SIconButton = styled(IconButton)`
   padding: 8px;

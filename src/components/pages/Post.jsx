@@ -1,20 +1,38 @@
 import styled from 'styled-components';
 import { Text } from '../organisms/Text';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { FooterIcon } from '../templates/FooterIcon';
+import { AuthContext } from '../../state/AuthContext';
+import { logoutCall } from '../../actionCalls';
+import LogoutIcon from '@mui/icons-material/Logout';
 export const Post = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get('/posts');
       console.log(response);
-      setPosts(response.data);
+      setPosts(
+        response.data.sort((post1, post2) => {
+          return new Date(post2.createdAt) - new Date(post1.createdAt);
+        }),
+      );
     };
     fetchPost();
   }, []);
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const logoutEvent = async () => {
+    try {
+      logoutCall(dispatch);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <SPostMain>
+      <SLogoutButton onClick={logoutEvent}>
+        <LogoutIcon style={{ fontSize: '14px' }} />
+      </SLogoutButton>
       <PostBg>
         <PostSlide>
           {posts.map((post) => (
@@ -30,6 +48,18 @@ export const Post = () => {
     </SPostMain>
   );
 };
+const SLogoutButton = styled.div`
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 15px;
+  text-align: center;
+  background: #dfdfdf;
+  color: #626161;
+  position: absolute;
+  top: 10%;
+  left: 20px;
+  z-index: 10;
+`;
 const SPostMain = styled.div`
   position: relative;
 `;

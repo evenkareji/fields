@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { AuthContext } from '../../state/AuthContext';
 import { UserIconImg } from '../atoms/UserIconImg';
 import { Icon } from '../atoms/Icon';
 import { Home } from '../molecules/Home';
@@ -8,6 +8,9 @@ import next from '../../images/next.png';
 import styled from 'styled-components';
 
 export const FooterIcon = () => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext);
+
   return (
     <SFooter>
       {/* ホーム */}
@@ -16,8 +19,14 @@ export const FooterIcon = () => {
       <AddPostIcon />
 
       {/* プロフィール */}
-      <Icon link={'/profile/メイウェザー'}>
-        <SProfileIcon src={next} />
+      <Icon link={`/profile/${user.username}`}>
+        <SProfileIcon
+          src={
+            user.profileImg
+              ? PUBLIC_FOLDER + user.profileImg
+              : PUBLIC_FOLDER + 'person/noAvatar.png'
+          }
+        />
         <small>プロフィール</small>
       </Icon>
     </SFooter>

@@ -1,18 +1,47 @@
 import styled from 'styled-components';
 import { Link, Route, Routes } from 'react-router-dom';
 import { LoginForm } from '../atoms/LoginForm';
+import { useContext, useRef } from 'react';
+import { loginCall } from '../../actionCalls';
+import { AuthContext } from '../../state/AuthContext';
 
 export const Login = () => {
+  const email = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginCall(
+      {
+        email: email.current.value,
+        password: password.current.value,
+      },
+      dispatch,
+    );
+  };
+  console.log(user);
+
   return (
     <SLoginBack>
       <SLoginBorder>
-        <SForm>
-          <SFormHead>AFim</SFormHead>
-          <SEmail placeholder="メールアドレス" />
-          <SPassword placeholder="パスワード" />
-          <SLink to="/" style={{ textDecoration: 'none', color: '#fff' }}>
-            <SSubmit type="submit">ログイン</SSubmit>
-          </SLink>
+        <SForm onSubmit={(e) => handleSubmit(e)}>
+          <SFormHead>Fields</SFormHead>
+          <SEmail
+            ref={email}
+            email="email"
+            placeholder="メールアドレス"
+            required
+          />
+          <SPassword
+            ref={password}
+            type="password"
+            placeholder="パスワード"
+            required
+            minLength="6"
+          />
+          {/* <SLink to="/" style={{ textDecoration: 'none', color: '#fff' }}> */}
+          <SSubmit type="submit">ログイン</SSubmit>
+          {/* </SLink> */}
           <SHr />
           <STextFlex>
             <p>アカウントをお持ちでないですか?</p>
@@ -35,7 +64,9 @@ const SLoginBack = styled.div`
   align-items: center;
 `;
 const SLoginBorder = styled.div`
-  width: 90%;
+  width: 60%;
+  min-width: 394px;
+  max-width: 640px;
   background-color: #fff;
   height: 80vh;
   border-radius: 16px;
@@ -54,14 +85,14 @@ const SForm = styled.form`
 const SFormHead = styled.div`
   font-weight: bold;
   font-size: 24px;
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 `;
 const SEmail = styled(LoginForm)`
   margin-bottom: 14px;
 `;
 
 const SPassword = styled(LoginForm)`
-  margin-bottom: 28px;
+  margin-bottom: 38px;
 `;
 
 const SSubmit = styled.button`
