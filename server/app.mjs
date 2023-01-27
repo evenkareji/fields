@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 env.config();
 const app = express();
-const post = 8000;
+const post = process.env.PORT || 8000;
 
 // データベース接続
 mongoose
