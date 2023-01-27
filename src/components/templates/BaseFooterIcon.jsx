@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserIconImg } from '../atoms/UserIconImg';
-import { Icon } from '../atoms/Icon';
 import { Home } from '../molecules/Home';
+import { ProfileIcon } from '../molecules/ProfileIcon';
 import { AddPostIcon } from '../molecules/AddPostIcon';
-import next from '../../images/next.png';
 import styled from 'styled-components';
 
 export const FooterIcon = () => {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { user } = useContext(AuthContext);
+  const [isHomeIcon, setIsHomeIcon] = useState(false);
+  const [isAddIcon, setIsAddIcon] = useState(false);
+  const [isProfileIcon, setIsProfileIcon] = useState(false);
 
   return (
     <SFooter>
@@ -17,18 +17,8 @@ export const FooterIcon = () => {
       <Home />
       {/* addpost */}
       <AddPostIcon />
-
       {/* プロフィール */}
-      <Icon link={`/profile/${user.username}`}>
-        <SProfileIcon
-          src={
-            user.profileImg
-              ? PUBLIC_FOLDER + user.profileImg
-              : PUBLIC_FOLDER + 'person/noAvatar.png'
-          }
-        />
-        <small>プロフィール</small>
-      </Icon>
+      <ProfileIcon />
     </SFooter>
   );
 };
@@ -49,8 +39,4 @@ const SFooter = styled.footer`
       justify-content: space-around;
     }
   }
-`;
-const SProfileIcon = styled(UserIconImg)`
-  width: 32px;
-  height: 32px;
 `;

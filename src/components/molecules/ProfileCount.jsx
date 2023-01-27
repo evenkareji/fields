@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ProfileCountDt } from '../atoms/ProfileCountDt';
 import { ProfileCountDd } from '../atoms/ProfileCountDd';
 
-export const ProfileCount = ({ count, name }) => {
+export const ProfileCount = ({ count, name, toFollowsPage }) => {
   return (
-    <ProfileDl>
+    <ProfileDl onClick={toFollowsPage}>
       <ProfileCountDt>{count}</ProfileCountDt>
       <ProfileCountDd>{name}</ProfileCountDd>
     </ProfileDl>

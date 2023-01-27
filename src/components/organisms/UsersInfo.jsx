@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { UserInfo } from '../molecules/UserInfo';
-export const UsersInfo = () => {
+export const UsersInfo = ({ followers }) => {
   return (
     <SUsersContainer>
-      <UserInfo />
-      <UserInfo />
-      <UserInfo />
-      <UserInfo />
-      <UserInfo />
-      <UserInfo />
-      <UserInfo />
+      <UserInfo followers={followers} />
+      <UserInfo followers={followers} />
+      <UserInfo followers={followers} />
+      <UserInfo followers={followers} />
+      <UserInfo followers={followers} />
+      <UserInfo followers={followers} />
     </SUsersContainer>
   );
 };

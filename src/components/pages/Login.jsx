@@ -19,7 +19,6 @@ export const Login = () => {
       dispatch,
     );
   };
-  console.log(user);
 
   return (
     <SLoginBack>
@@ -39,9 +38,9 @@ export const Login = () => {
             required
             minLength="6"
           />
-          {/* <SLink to="/" style={{ textDecoration: 'none', color: '#fff' }}> */}
+
           <SSubmit type="submit">ログイン</SSubmit>
-          {/* </SLink> */}
+
           <SHr />
           <STextFlex>
             <p>アカウントをお持ちでないですか?</p>

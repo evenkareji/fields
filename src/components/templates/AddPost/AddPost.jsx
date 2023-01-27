@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { AuthContext } from '../../state/AuthContext';
-import { FooterIcon } from '../templates/FooterIcon';
-import { UserIconImg } from '../atoms/UserIconImg';
+import { AuthContext } from '../../../state/AuthContext';
+import { FooterHome } from '../FooterHome';
+import { UserIconImg } from '../../atoms/UserIconImg';
 
 import axios from 'axios';
+import { FooterAddPost } from '../FooterAddPost';
+// import { FooterAddPost } from '../FooterAddPost';
 
 export const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -79,20 +81,17 @@ export const AddPost = () => {
   const TextLimit = (e) => {
     if (e.target.value.length === 0) {
       setIsText(false);
-      console.log('0');
     } else if (30 < e.target.value.length) {
       setIsText(false);
-      console.log('15<0');
     } else {
       setIsText(true);
-      console.log('jj');
     }
   };
 
   return (
     <Scenter>
-      <form>
-        <UserIconImg src={PUBLIC_FOLDER + user.profileImg} />
+      <form method="post" style={{ width: '100%' }}>
+        {/* <UserIconImg src={PUBLIC_FOLDER + user.profileImg} /> */}
 
         <SInputTextarea
           placeholder="どう感じますか？"
@@ -111,12 +110,13 @@ export const AddPost = () => {
           送信
         </SSubmit>
       </form>
-      <FooterIcon />
+      <FooterAddPost />
     </Scenter>
   );
 };
 const SInputTextarea = styled.textarea`
   width: 100%;
+  min-width: 300px;
   resize: none;
   border: none;
   font-family: 'Noto Serif JP';
@@ -127,8 +127,6 @@ const Scenter = styled.div`
   position: relative;
   padding: 180px;
   margin: 0 auto;
-  max-width: 800px;
-  border: 1px solid #000;
   height: 100vh;
 `;
 const SSubmit = styled.div`
@@ -148,4 +146,5 @@ const SSubmit = styled.div`
   }
   pointer-events: ${({ isText }) => (isText ? 'auto' : 'none')};
   background-color: ${({ isText }) => (isText ? '#ff6702' : '#9e9c9c')};
+  cursor: pointer;
 `;

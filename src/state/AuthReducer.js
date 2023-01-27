@@ -18,6 +18,12 @@ export const AuthReducer = (state, action) => {
         isFetcing: true,
         error: false,
       };
+    case 'IS_FOLLOW':
+      return {
+        user: action.payload,
+        isFetcing: false,
+        error: false,
+      };
     case 'LOGIN_ERROR':
       return {
         user: null,

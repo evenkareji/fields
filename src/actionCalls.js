@@ -16,3 +16,12 @@ export const logoutCall = async (dispatch) => {
     dispatch({ type: 'LOGIN_ERROR', payload: err });
   }
 };
+// export const followCall = async (user, dispatch) => {
+//   dispatch({ type: 'IS_FOLLOW' });
+//   try {
+//     const response = await axios.get('/users/followings', user);
+//     dispatch({ type: 'IS_FOLLOW', payload: response.data });
+//   } catch (err) {
+//     dispatch({ type: 'IS_FOLLOW', payload: err });
+//   }
+// };

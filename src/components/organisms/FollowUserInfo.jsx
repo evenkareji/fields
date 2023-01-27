@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UserIconImg } from '../atoms/UserIconImg';
-import insta from '../../images/insta.png';
 import { OnFollowBtn } from '../atoms/OnFollowBtn';
 import { UsersInfo } from './UsersInfo';
 import { SearchUsers } from '../molecules/SearchUsers';

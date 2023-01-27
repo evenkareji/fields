@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { SUserIconImg } from '../atoms/UserIconImg';
 import styled from 'styled-components';
 import { ProfileCount } from '../molecules/ProfileCount';
 import { PersonalPost } from '../organisms/PersonalPost';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { FooterIcon } from '../templates/FooterIcon';
+// import { FooterIcon } from '../templates/FooterIcon';
 import { UserIconWithName } from '../molecules/UserIconWithName';
-import { AuthContext } from '../../state/AuthContext';
+import { FooterProfile } from '../templates/FooterProfile';
+import { FollowTab } from './FollowTab';
 
 export const Profile = () => {
-  const { user } = useContext(AuthContext);
-
+  const [isToPage, setIsToPage] = useState(false);
+  const toFollowsPage = () => {
+    setIsToPage((prev) => !prev);
+  };
   const [profileUser, setProfileUser] = useState([]);
   const username = useParams().username;
   useEffect(() => {
     const fetchPost = async () => {
       const response = await axios.get(`/users?username=${username}`);
-
       setProfileUser(response.data);
     };
     fetchPost();
@@ -26,16 +27,23 @@ export const Profile = () => {
 
   return (
     <SProfileBox>
+      <SFollowTab
+        isToPage={isToPage}
+        toFollowsPage={toFollowsPage}
+        style={{ position: 'absolute' }}
+      />
       <SProfileInfo>
         {/* icon */}
         <UserIconWithName profileUser={profileUser} />
         <SProfileFlex>
-          <ProfileCount name="投稿" count="999" />
+          {/* <ProfileCount name="投稿" count="999" /> */}
           <ProfileCount
+            toFollowsPage={toFollowsPage}
             name="フォロー"
             count={profileUser.followings?.length}
           />
           <ProfileCount
+            toFollowsPage={toFollowsPage}
             name="フォロワー"
             count={profileUser.followers?.length}
           />
@@ -50,12 +58,15 @@ export const Profile = () => {
       <SPadding>
         <PersonalPost username={username} />
       </SPadding>
-      <FooterIcon username={username} />
+      <FooterProfile username={username} />
     </SProfileBox>
   );
 };
+const SFollowTab = styled(FollowTab)``;
 const SProfileBox = styled.div`
   position: relative;
+  width: 100%;
+  overflow: hidden;
 `;
 const SIntroduction = styled.div`
   padding: 30px 0px 0px;

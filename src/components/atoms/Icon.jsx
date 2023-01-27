@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 export const Icon = ({ children, link }) => {
   return (
-    <SLink to={link}>
+    <SLink to={{ pathname: link }}>
       <SIconButton>{children}</SIconButton>
     </SLink>
   );

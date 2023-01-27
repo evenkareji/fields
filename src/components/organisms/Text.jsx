@@ -8,11 +8,13 @@ import { IconButton } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../state/AuthContext';
+import { followCall } from '../../actionCalls';
 
 export const Text = ({ post }) => {
-  const [isFollow, setIsFollow] = useState(false);
   const [user, setUser] = useState({});
-  const { user: loginUser } = useContext(AuthContext);
+  // user(loginUser)が更新されないからフォローしても変更されない
+  const { user: loginUser, dispatch } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(`/users/${post.userId}`);
@@ -32,28 +34,32 @@ export const Text = ({ post }) => {
       console.log(err);
     }
   };
-  const handleFollow = async () => {
-    try {
-      // フォローはできてるけどstorageに保存できてない;
-      console.log('実行');
-      const response = await axios.put(`/users/${post.userId}/follow`, {
-        userId: loginUser._id,
-      });
-      console.log('実行完了');
-
-      // setIsGood(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   const handleUnFollow = async () => {
     try {
+      setIsFollow(false);
+
       // フォローはできてるけどstorageに保存できてない;
       console.log('実行');
       const response = await axios.put(`/users/${post.userId}/unfollow`, {
         userId: loginUser._id,
       });
       console.log('実行完了');
+      // followCall({ userId: loginUser.userId }, ew);
+      // setIsGood(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleFollow = async () => {
+    try {
+      // フォローはできてるけどstorageに保存できてない;
+      console.log('実行');
+      setIsFollow(true);
+      const response = await axios.put(`/users/${post.userId}/follow`, {
+        userId: loginUser._id,
+      });
+      console.log('実行完了');
+      // followCall({}, dispatch);
 
       // setIsGood(response.data);
     } catch (err) {
@@ -61,6 +67,12 @@ export const Text = ({ post }) => {
     }
   };
   // HeartActionSave
+  const [isFollow, setIsFollow] = useState();
+  // loginUser.followings.includes(post.userId),
+
+  // );
+  console.log(loginUser.followings, user.username, isFollow);
+  // console.log(isFollow, 'isFollow');
   const [isGood, setIsGood] = useState(post.likes.includes(loginUser._id));
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -85,17 +97,17 @@ export const Text = ({ post }) => {
               {user.username}
             </SUserName>
             {/* onClick={() => */}
+            {/* onClick={() => setIsFollow(!isFollow)} */}
             {loginUser._id !== post.userId && (
-              <div
-                onClick={() => {
-                  handleFollow();
-                  return setIsFollow(!isFollow);
-                }}
-              >
+              <div>
                 {isFollow ? (
-                  <OnFollowBtn>フォロー中</OnFollowBtn>
+                  <OnFollowBtn handleUnFollow={handleUnFollow}>
+                    フォロー中
+                  </OnFollowBtn>
                 ) : (
-                  <UnFollowBtn>フォロー</UnFollowBtn>
+                  <UnFollowBtn handleFollow={handleFollow}>
+                    フォロー
+                  </UnFollowBtn>
                 )}
               </div>
             )}
@@ -144,7 +156,7 @@ const SDescContainer = styled.div`
 const SPostArticle = styled.p`
   font-size: 24px;
   color: #000;
-  font-family: 'Noto Serif JP';
+  font-family: 'Hannari';
   line-height: 2.4em;
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
 `;

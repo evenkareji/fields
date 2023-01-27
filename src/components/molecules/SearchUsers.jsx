@@ -14,4 +14,6 @@ const SearchContainer = styled.div`
   margin: 0 auto;
   width: 92%;
   position: relative;
+  max-width: 680px;
+  margin-bottom: 25px;
 `;

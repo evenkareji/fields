@@ -2,6 +2,7 @@ import { createContext, useEffect, useReducer } from 'react';
 import { AuthReducer } from './AuthReducer';
 
 const initialState = {
+  // リロード
   user: JSON.parse(localStorage.getItem('user')) || null,
   isFetching: false,
   error: false,

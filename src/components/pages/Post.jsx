@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Text } from '../organisms/Text';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { FooterIcon } from '../templates/FooterIcon';
+import { FooterHome } from '../templates/FooterHome';
 import { AuthContext } from '../../state/AuthContext';
 import { logoutCall } from '../../actionCalls';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -28,6 +28,7 @@ export const Post = () => {
       console.log(err);
     }
   };
+
   return (
     <SPostMain>
       <SLogoutButton onClick={logoutEvent}>
@@ -38,13 +39,9 @@ export const Post = () => {
           {posts.map((post) => (
             <Text post={post} key={post._id} />
           ))}
-
-          {/* <Text user={user} />
-          <Text user={user} />
-          <Text user={user} /> */}
         </PostSlide>
       </PostBg>
-      <FooterIcon />
+      <FooterHome />
     </SPostMain>
   );
 };

@@ -2,23 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import { OnFollowBtn } from '../atoms/OnFollowBtn';
 import { UserIconImg } from '../atoms/UserIconImg';
-import insta from '../../images/next.png';
-export const UserInfo = () => {
+// import insta from '../../images/next.png';
+export const UserInfo = ({ followers }) => {
+  console.log(followers, 'huhjrgqih');
   return (
     <UserBorder>
-      <SFollowImg src={insta} />
+      <SFollowImg />
       <SFollowContainer>
-        <SFollowName>メイ</SFollowName>
-        <SFollowDesc>I blive my skills</SFollowDesc>
+        <SFollowName>{followers.username}</SFollowName>
+        <SFollowDesc>{followers.desc}</SFollowDesc>
       </SFollowContainer>
       <SOnFollowButton>フォロー</SOnFollowButton>
     </UserBorder>
   );
 };
 const UserBorder = styled.div`
-  width: 394px;
+  width: 100%;
+  max-width: 680px;
   margin: 0 auto;
-  border: 1px solid #000;
   display: flex;
   align-items: center;
 `;

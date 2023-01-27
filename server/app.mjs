@@ -16,7 +16,7 @@ const post = 8000;
 
 // データベース接続
 mongoose
-  .connect(process.env.MONGOURL)
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log('DBと接続中');
   })
@@ -24,13 +24,18 @@ mongoose
     console.log(err);
   });
 // ミドルウェア
-
 app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+app.use('/', express.static('build'));
 app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/upload', uploadRouter);
+
+app.get('*', function (req, res) {
+  const indexHtml = path.resolve('build', 'index.html');
+  res.sendFile(indexHtml);
+});
 
 app.listen(post, () => console.log(`Server is running ... localhost:${post}`));
